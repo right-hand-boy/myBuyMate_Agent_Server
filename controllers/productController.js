@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../middleware/upload");
+const upload = require("../Middleware/upload");
 const Product = require("../models/Product");
 const ProductImage = require("../models/ProductImage");
 const Seller = require("../models/Agent");
