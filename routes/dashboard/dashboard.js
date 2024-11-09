@@ -6,7 +6,7 @@ const { reportData } = require("./reportData");
 const { barData } = require("./barData");
 const { lineData } = require("./lineData");
 const { visitorData } = require("./visitor");
-const { visitorCityData } = require("./visitorcity");
+const { visitorCityData } = require("./visitorCity");
 const { topSellingProducts } = require("./topSellingProducts");
 
 // Export the function
