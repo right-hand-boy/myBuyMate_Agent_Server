@@ -42,11 +42,11 @@ async function sendToTelegram(
   price,
   mainImageUrl
 ) {
-  const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
+  const telegramBotToken = "7321021471:AAGgkwrj1hJezseOH9dEzB6o-psVxE9lC2g";
   const chatId = "-1002409576699"; // Group ID
 
   // Construct the product link dynamically
-  const productLink = `https://mybuymate.netlify.app/product/${productId}`;
+  const productLink = `https://mybuymate-shop.web.app/product/${productId}`;
   const encodedProductLink = encodeURI(productLink);
 
   const message = ` 
@@ -68,7 +68,7 @@ async function sendToTelegram(
     [
       {
         text: "📞 Contact Support",
-        url: "https://yourbrandingwebsite.com/support", // Adjust with your support link
+       url: "tel:+251911290020",
       },
     ],
   ];
