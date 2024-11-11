@@ -59,19 +59,20 @@ async function sendToTelegram(
 
   // Define the inline keyboard with a branded "View Product" button
   const inlineKeyboard = [
-    [
-      {
-        text: "🛒 View Product Details",
-        url: encodedProductLink, // Dynamic link to the product page
-      },
-    ],
-    [
-      {
-        text: "📞 Contact Support",
-       url: "tel:+251911290020",
-      },
-    ],
-  ];
+  [
+    {
+      text: "🛒 View Product Details",
+      url: encodedProductLink, // Assuming this is defined and correctly encoded
+    },
+  ],
+  [
+    {
+      text: "📞 Contact Support",
+      url: encodeURIComponent("tel:+251911290020"),
+    },
+  ],
+];
+
 
   const url = `https://api.telegram.org/bot${telegramBotToken}/sendPhoto`;
 
