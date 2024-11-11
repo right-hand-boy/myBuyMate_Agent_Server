@@ -53,9 +53,11 @@ async function sendToTelegram(
   <b>${productName}</b> by <i>${brand}</i>\n\n
   <b>💰 Price:</b> <b>${price} ETB</b>\n\n
   <b>🔗 Explore Product:</b> <a href="${encodedProductLink}">Visit Product Page</a>\n\n
+  <b>📞 Contact Support:</b> <a href="tel:+251911290020">Call Now</a>\n\n
   <i>Discover the exclusive features and make this product yours today!</i>\n
   <i>Shop smart, shop quality!</i>
 `;
+
 
   // Define the inline keyboard with a branded "View Product" button
   const inlineKeyboard = [
@@ -63,12 +65,6 @@ async function sendToTelegram(
     {
       text: "🛒 View Product Details",
       url: encodedProductLink, // Assuming this is defined and correctly encoded
-    },
-  ],
-  [
-    {
-      text: "📞 Contact Support",
-      url: encodeURIComponent("tel:+251911290020"),
     },
   ],
 ];
