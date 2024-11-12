@@ -50,10 +50,10 @@ async function sendToTelegram(
   const encodedProductLink = encodeURI(productLink);
 
   const message = ` 
-  <b>${productName}</b> by <i>${brand}</i>\n\n
-  <b>💰 Price:</b> <b>${price} ETB</b>\n\n
-  <b>🔗 Explore Product:</b> <a href="${encodedProductLink}">Visit Product Page</a>\n\n
-  <b>📞 Contact Support:</b> <a href="tel:+251911290020">Call Now</a>\n\n
+  <b>${productName}</b> by <i>${brand}</i>\n
+  <b>💰 Price:</b> <b>${price} ETB</b>\n
+  <b>🔗 Explore Product:</b> <a href="${encodedProductLink}">Visit Product Page</a>\n
+  <b>📞 Contact Support:</b> <a href="tel:+251911290020">Call Now</a> <b>+251911290020</b>\n
   <i>Discover the exclusive features and make this product yours today!</i>\n
   <i>Shop smart, shop quality!</i>
 `;
