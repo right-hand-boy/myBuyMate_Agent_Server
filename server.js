@@ -7,6 +7,7 @@ const http = require("http"); // Import http to integrate socket.io
 
 const login = require("./routes/common/login");
 const agentInformation = require("./routes/account/agentInformation");
+const updatePasword = require("./routes/account/updatePasword");
 const Dashboard = require("./routes/dashboard/dashboard");
 const Order = require("./routes/orders/order");
 const Products = require("./routes/products/products");
@@ -32,8 +33,9 @@ connectDB();
 
 app.use("/", login);
 app.use("/", Categories);
-app.use("/", agentInformation);
 app.use("/", ProfileImage);
+app.use("/", agentInformation);
+app.use("/", updatePasword);
 app.use("/dashboard", Dashboard);
 app.use("/manage", Order);
 app.use("/", Banners);
