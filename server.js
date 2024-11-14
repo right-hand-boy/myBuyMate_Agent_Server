@@ -24,7 +24,7 @@ require("dotenv").config();
 setupMiddleware(app);
 app.use(
   cors({
-    origin: "https://mybuymateagent.netlify.app",
+    origin: "http://mybuymate-shop.web.app",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
