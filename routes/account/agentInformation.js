@@ -4,10 +4,10 @@ const jwt = require("jsonwebtoken");
 const Sellers = require("../../models/Sellers");
 const ProfileImage = require("../../models/ProfileImage"); // Assuming you have a model for ProfileImage
 const { check, validationResult } = require("express-validator");
-const mongoose = require("mongoose"); // Make sure mongoose is required
-const upload = require("../../Middleware/upload"); // Ensure you have your upload middleware
+const mongoose = require("mongoose"); // Ensure mongoose is required
+const upload = require("../../middleware/upload"); // Ensure you have your upload middleware
 const router = express.Router();
-const SECRET_KEY = process.env.SECRET_KEY || "your_secret_key"; // Use environment variable
+const SECRET_KEY = process.env.SECRET_KEY || "your_strong_secret_key"; // Use environment variable
 
 // Route to update user info
 router.post("/update-user-info", upload.single("image"), async (req, res) => {
@@ -20,13 +20,13 @@ router.post("/update-user-info", upload.single("image"), async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     // Update the user information
-    agent.seller_name = fullname;
+    agent.seller_name = fullname || agent.seller_name;
     agent.email = email || agent.email;
     agent.phonenumber = phonenumber || agent.phonenumber;
-    agent.seller_name = agent.seller_name;
-    agent.store_name = storeName;
-    agent.location = location;
-    await Sellers.save();
+    agent.store_name = storeName || agent.store_name;
+    agent.location = location || agent.location;
+
+    await agent.save(); // Save the updated agent document
 
     return res.status(200).json({
       message: "User info updated successfully.",
@@ -35,7 +35,6 @@ router.post("/update-user-info", upload.single("image"), async (req, res) => {
         email: agent.email,
         phonenumber: agent.phonenumber,
         fullName: agent.seller_name,
-        seller_name: agent.seller_name,
         store_name: agent.store_name,
         location: agent.location,
       },
@@ -80,7 +79,7 @@ router.post(
       const hashedPassword = await bcrypt.hash(newPassword, salt);
 
       agent.password = hashedPassword;
-      await Sellers.save();
+      await agent.save(); // Save the updated password
 
       return res.status(200).json({ message: "Password updated successfully" });
     } catch (error) {
