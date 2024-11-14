@@ -5,7 +5,7 @@ const Sellers = require("../../models/Sellers");
 const ProfileImage = require("../../models/ProfileImage"); // Assuming you have a model for ProfileImage
 const { check, validationResult } = require("express-validator");
 const mongoose = require("mongoose"); // Ensure mongoose is required
-const upload = require("../../middleware/upload"); // Ensure you have your upload middleware
+const upload = require("../../Middleware/upload"); // Ensure you have your upload middleware
 const router = express.Router();
 const SECRET_KEY = process.env.SECRET_KEY || "your_strong_secret_key"; // Use environment variable
 
