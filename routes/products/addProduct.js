@@ -43,7 +43,7 @@ async function sendToTelegram(
   mainImageUrl
 ) {
   const telegramBotToken = "7321021471:AAGgkwrj1hJezseOH9dEzB6o-psVxE9lC2g";
-  const chatId = "-1002409576699"; // Group ID
+  const chatIds = ["-1002409576699", "-1002333013868"]; // Group and Channel IDs
 
   // Construct the product link dynamically
   const productLink = `https://mybuymate-shop.web.app/product/${productId}`;
@@ -58,45 +58,46 @@ async function sendToTelegram(
   <i>Shop smart, shop quality!</i>
 `;
 
-
   // Define the inline keyboard with a branded "View Product" button
   const inlineKeyboard = [
-  [
-    {
-      text: "🛒 View Product Details",
-      url: encodedProductLink, // Assuming this is defined and correctly encoded
-    },
-  ],
-];
-
+    [
+      {
+        text: "🛒 View Product Details",
+        url: encodedProductLink,
+      },
+    ],
+  ];
 
   const url = `https://api.telegram.org/bot${telegramBotToken}/sendPhoto`;
 
-  const body = {
-    chat_id: chatId,
-    photo: mainImageUrl, // Send the main image as a photo
-    caption: message, // Set the message as the caption
-    parse_mode: "HTML", // HTML formatting
-    reply_markup: {
-      inline_keyboard: inlineKeyboard, // Attach the inline keyboard
-    },
-  };
+  for (const chatId of chatIds) {
+    const body = {
+      chat_id: chatId,
+      photo: mainImageUrl,
+      caption: message,
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: inlineKeyboard,
+      },
+    };
 
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
-    const data = await response.json();
-    if (!data.ok) {
-      console.error("Telegram error:", data.description);
+      const data = await response.json();
+      if (!data.ok) {
+        console.error(`Telegram error for chat ID ${chatId}:`, data.description);
+      }
+    } catch (error) {
+      console.error(`Error sending message to chat ID ${chatId}:`, error);
     }
-  } catch (error) {
-    console.error("Error sending message to Telegram:", error);
   }
 }
+
 
 async function addProduct(req, res) {
   try {
