@@ -1,20 +1,16 @@
+const express = require("express");
 const mongoose = require("mongoose");
-const Product = require("../models/Product"); // Adjust the path to your Product model
-const ProductImage = require("../models/ProductImage"); // Adjust the path to your ProductImage model
-const PricingInventory = require("../models/PricingInventory"); // Adjust the path to your PricingInventory model
+const Product = require("../models/Product");
+const ProductImage = require("../models/ProductImage");
+const PricingInventory = require("../models/PricingInventory");
 const fetch = require("node-fetch");
 
-async function sendToTelegram(
-  productId,
-  productName,
-  brand,
-  price,
-  mainImageUrl
-) {
+const router = express.Router();
+
+async function sendToTelegram(productId, productName, brand, price, mainImageUrl) {
   const telegramBotToken = "7321021471:AAGgkwrj1hJezseOH9dEzB6o-psVxE9lC2g";
   const chatIds = ["-1002409576699", "-1002333013868"]; // Group and Channel IDs
 
-  // Construct the product link dynamically
   const productLink = `https://waliamartagent.web.app/product/${productId}`;
   const encodedProductLink = encodeURI(productLink);
 
@@ -27,7 +23,6 @@ async function sendToTelegram(
   <i>Shop smart, shop quality!</i>
 `;
 
-  // Define the inline keyboard with a branded "View Product" button
   const inlineKeyboard = [
     [
       {
@@ -59,17 +54,13 @@ async function sendToTelegram(
 
       const data = await response.json();
       if (!data.ok) {
-        console.error(
-          `Telegram error for chat ID ${chatId}:`,
-          data.description
-        );
+        console.error(`Telegram error for chat ID ${chatId}:`, data.description);
       }
     } catch (error) {
       console.error(`Error sending message to chat ID ${chatId}:`, error);
     }
   }
 }
-
 
 async function sendAllProductsToTelegram() {
   try {
@@ -112,20 +103,15 @@ async function sendAllProductsToTelegram() {
   }
 }
 
-(async () => {
+// Route to trigger sending products to Telegram
+router.post("/send-products", async (req, res) => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/yourDatabaseName", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-
-    console.log("Connected to MongoDB");
-
-    // Send all products to Telegram
     await sendAllProductsToTelegram();
-
-    mongoose.disconnect();
+    res.status(200).json({ message: "Products sent to Telegram successfully!" });
   } catch (error) {
-    console.error("Database connection error:", error);
+    console.error("Error in /send-products route:", error);
+    res.status(500).json({ error: "Failed to send products to Telegram." });
   }
-})();
+});
+
+module.exports = router;
