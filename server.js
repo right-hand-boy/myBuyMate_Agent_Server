@@ -15,6 +15,7 @@ const ProfileImage = require("./routes/account/profileImage");
 const Categories = require("./routes/common/categories");
 const Banners = require("./routes/promotion/promotion");
 const Notifications = require("./routes/notifications/notifications");
+const SendAllProductsToTelegram = require("./routes/sendAllProductsToTelegram");
 
 const app = express();
 const server = http.createServer(app); // Create an HTTP server
@@ -40,8 +41,9 @@ app.use("/dashboard", Dashboard);
 app.use("/manage", Order);
 app.use("/", Banners);
 app.use("/", Products);
-app.use("/notifications", Notifications);
 
+app.use("/notifications", Notifications);
+app.use("/", SendAllProductsToTelegram);
 // Global error handler
 app.use(errorHandler);
 
