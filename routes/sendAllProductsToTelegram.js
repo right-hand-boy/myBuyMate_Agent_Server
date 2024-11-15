@@ -93,11 +93,8 @@ async function sendAllProductsToTelegram() {
         pricing.price,
         mainImage.imageUrl
       );
-
-      console.log(`Sent product: ${product.productName} to Telegram`);
     }
 
-    console.log("All products have been processed.");
   } catch (error) {
     console.error("Error while sending products to Telegram:", error);
   }
