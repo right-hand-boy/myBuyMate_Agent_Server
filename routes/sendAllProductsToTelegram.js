@@ -11,7 +11,7 @@ async function sendToTelegram(productId, productName, brand, price, mainImageUrl
   const telegramBotToken = "7321021471:AAGgkwrj1hJezseOH9dEzB6o-psVxE9lC2g";
   const chatIds = ["-1002409576699", "-1002333013868"]; // Group and Channel IDs
 
-  const productLink = `https://waliamartagent.web.app/product/${productId}`;
+  const productLink = `https://waliamart.web.app/product/${productId}`;
   const encodedProductLink = encodeURI(productLink);
 
   const message = ` 
