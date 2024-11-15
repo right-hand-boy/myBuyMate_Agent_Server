@@ -46,7 +46,7 @@ async function sendToTelegram(
   const chatIds = ["-1002409576699", "-1002333013868"]; // Group and Channel IDs
 
   // Construct the product link dynamically
-  const productLink = `https://mybuymate-shop.web.app/product/${productId}`;
+  const productLink = `https://waliamartagent.web.app/product/${productId}`;
   const encodedProductLink = encodeURI(productLink);
 
   const message = ` 
