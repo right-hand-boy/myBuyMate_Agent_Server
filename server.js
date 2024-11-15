@@ -24,7 +24,7 @@ require("dotenv").config();
 setupMiddleware(app);
 app.use(
   cors({
-    origin: "https://mybuymate-agent.web.app",
+    origin: "https://waliamartagent.web.app",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
